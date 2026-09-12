@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Environment variables — NEVER commit real keys
+.env
+
+# Temp files
+*.tmp
+*.log
+*.mp3
+*.mp4
+*.wav
+*.m4a
+
+# OS
+.DS_Store
+Thumbs.db
