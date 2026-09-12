@@ -368,7 +368,7 @@ async def transcribe_audio(
             shutil.copyfileobj(file.file, tmp)
             tmp_path = tmp.name
 
-        config = aai.TranscriptionConfig(speaker_labels=True, speech_models=["universal"])
+        config = aai.TranscriptionConfig(speaker_labels=True, speech_model=aai.SpeechModel.universal)
         transcriber = aai.Transcriber()
         transcript = transcriber.transcribe(tmp_path, config)
 
