@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Intelligence Workspace — Vocalis AI</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=7">
+</head>
+<body class="workspace-body">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand">
+                <div class="brand-logo">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="14" stroke="url(#brand-grad)" stroke-width="2.5"/>
+                        <path d="M10 16V16.01M13 12V20M16 9V23M19 12V20M22 16V16.01" stroke="url(#brand-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="brand-grad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38BDF8"/>
+                                <stop offset="1" stop-color="#6366F1"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="brand-title">Vocalis<span>AI</span></span>
+            </a>
+
+            <div class="nav-actions">
+                <a href="/" class="nav-btn-back">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                        <path d="M15.833 10H4.167m0 0l5-5m-5 5l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Workspace Main Container -->
+    <main class="workspace-container">
+        <!-- Header -->
+        <header class="workspace-header">
+            <div class="badge-pill">
+                <span>Audio Intelligence Workspace</span>
+            </div>
+            <h1 class="workspace-title">Upload Meeting Audio</h1>
+            <p class="workspace-desc">Upload your meeting recording to automatically view the verbatim transcription, overall summary (Tanglish for bilingual input), person-wise summaries, and delegated actions.</p>
+        </header>
+
+        <!-- Upload Card -->
+        <section class="workspace-card glass-panel" id="upload-section">
+            <form id="upload-form" class="upload-form">
+                <!-- Drag & Drop Zone -->
+                <div class="drop-zone" id="drop-zone">
+                    <input type="file" id="audio-upload" accept="audio/*,.mp3,.wav,.m4a,.aac,.flac,.ogg" class="file-input" hidden>
+                    
+                    <div class="drop-zone-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="drop-zone-text">
+                        <h3>Choose an audio file or drag it here</h3>
+                        <p>Supported Formats: MP3, WAV, M4A, AAC, FLAC (Up to 50MB)</p>
+                    </div>
+
+                    <!-- Selected File Preview -->
+                    <div id="file-preview-card" class="file-preview-card hidden">
+                        <div class="file-info-col">
+                            <div class="file-badge">AUDIO</div>
+                            <div>
+                                <h4 id="preview-file-name" class="file-name">recording.mp3</h4>
+                                <span id="preview-file-size" class="file-size">0 MB</span>
+                            </div>
+                        </div>
+                        <button type="button" id="remove-file-btn" class="remove-btn" title="Remove file">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error Banner -->
+                <div id="error-message" class="error-banner hidden"></div>
+
+                <!-- Action Button -->
+                <button type="submit" id="transcribe-btn" class="btn-submit" disabled>
+                    <span id="btn-text">Transcribe & Analyze Meeting</span>
+                    <div class="spinner hidden" id="btn-spinner"></div>
+                </button>
+            </form>
+        </section>
+
+        <!-- Pipeline Progress State -->
+        <div id="loading-state" class="loading-panel glass-panel hidden">
+            <div class="pipeline-loader">
+                <div class="pulse-ring"></div>
+                <div class="loader-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+            </div>
+            <h3 class="loading-title">Analyzing Meeting Audio...</h3>
+            <p class="loading-subtitle">Transcribing verbatim audio, generating executive summaries, and delegating action items.</p>
+            
+            <div class="pipeline-steps">
+                <div class="step-item active">
+                    <span class="step-dot"></span>
+                    <span>1. Verbatim Speech & Speaker Diarization</span>
+                </div>
+                <div class="step-item active">
+                    <span class="step-dot"></span>
+                    <span>2. Overall Meeting Synthesis (Tanglish / English)</span>
+                </div>
+                <div class="step-item active">
+                    <span class="step-dot"></span>
+                    <span>3. Person-wise Breakdown & Action Delegation</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Structured Results Section -->
+        <section id="results-section" class="results-section hidden">
+            <!-- Results Header & Actions -->
+            <div class="results-header">
+                <div>
+                    <span class="badge-pill">Analysis Complete</span>
+                    <h2 class="results-title">Meeting Intelligence Report</h2>
+                </div>
+                <div class="results-actions">
+                    <button id="copy-report-btn" class="action-btn" title="Copy Full Report">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                        <span>Copy Report</span>
+                    </button>
+                    <button id="export-txt-btn" class="action-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        <span>Export TXT</span>
+                    </button>
+                    <button id="export-md-btn" class="action-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        <span>Export MD</span>
+                    </button>
+                    <button id="new-recording-btn" class="action-btn action-btn-primary">
+                        <span>Upload Another Recording</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <!-- 1. PLACED FIRST: Verbatim Transcription -->
+                <div class="result-card glass-panel span-full">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon transcript-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>1. Verbatim Transcription</h3>
+                                <p class="card-subtitle">Exact word-for-word transcript with speaker turns and speech separation</p>
+                            </div>
+                        </div>
+                        <button id="copy-transcript-btn" class="mini-action-btn" title="Copy Verbatim Transcript">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>Copy Transcript</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="raw-transcript-box" class="transcript-scrollbox-open"></div>
+                    </div>
+                </div>
+
+                <!-- 2. PLACED SECOND: The Overall Meeting Summary (Tanglish if bilingual) -->
+                <div class="result-card glass-panel span-full">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon summary-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="20" x2="18" y2="10"/>
+                                    <line x1="12" y1="20" x2="12" y2="4"/>
+                                    <line x1="6" y1="20" x2="6" y2="14"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="title-with-pill">
+                                    <h3>2. Overall Meeting Summary</h3>
+                                    <span id="summary-lang-badge" class="badge-lang-pill">Executive Summary</span>
+                                </div>
+                                <p class="card-subtitle">Comprehensive synthesis (rendered in Tanglish for bilingual/Tamil conversations)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p id="overall-summary-text" class="summary-content"></p>
+                    </div>
+                </div>
+
+                <!-- 3. PLACED THIRD: Person-wise Summary -->
+                <div class="result-card glass-panel span-full">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon speaker-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>3. Person-wise Summary</h3>
+                                <p class="card-subtitle">Detailed discussion points and contributions categorized by each speaker</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="personwise-container" class="speakers-grid"></div>
+                    </div>
+                </div>
+
+                <!-- 4. PLACED FOURTH: Actions To Be Done -->
+                <div class="result-card glass-panel span-full">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon action-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 11 12 14 22 4"/>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>4. Actions To Be Done</h3>
+                                <p class="card-subtitle">Tasks discussed with speaker attribution (who said the work) and delegation (who it is assigned to)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="action-items-container" class="action-cards-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <span class="brand-title">Vocalis<span>AI</span></span>
+            <p>© 2026 Vocalis AI. Enterprise-grade meeting transcription & analysis.</p>
+        </div>
+    </footer>
+
+    <script src="/static/script.js?v=7"></script>
+</body>
+</html>
