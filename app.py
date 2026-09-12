@@ -22,9 +22,10 @@ os.makedirs(STATIC_DIR, exist_ok=True)
 
 # Load AssemblyAI API Key from environment (set in Render dashboard or .env locally)
 INBUILT_AAI_KEY = os.getenv("ASSEMBLYAI_API_KEY", "")
-if not INBUILT_AAI_KEY:
-    raise RuntimeError("ASSEMBLYAI_API_KEY environment variable is not set.")
-aai.settings.api_key = INBUILT_AAI_KEY
+if INBUILT_AAI_KEY:
+    aai.settings.api_key = INBUILT_AAI_KEY
+else:
+    print("WARNING: ASSEMBLYAI_API_KEY is not set. Transcription will not work until it is added.")
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
@@ -356,6 +357,9 @@ async def transcribe_audio(
     openrouter_key: Optional[str] = Form(None)
 ):
     try:
+        if not INBUILT_AAI_KEY:
+            raise HTTPException(status_code=503, detail="ASSEMBLYAI_API_KEY is not configured on the server. Please add it in the Render environment variables.")
+
         suffix = os.path.splitext(file.filename)[1] if file.filename else ".mp3"
         if not suffix:
             suffix = ".mp3"
