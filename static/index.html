@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocalis AI — Meeting Intelligence & Audio Summarization</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=6">
+</head>
+<body class="home-body">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand">
+                <div class="brand-logo">
+                    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="14" stroke="url(#brand-grad)" stroke-width="2.5"/>
+                        <path d="M10 16V16.01M13 12V20M16 9V23M19 12V20M22 16V16.01" stroke="url(#brand-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="brand-grad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38BDF8"/>
+                                <stop offset="1" stop-color="#6366F1"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="brand-title">Vocalis<span>AI</span></span>
+            </a>
+
+            <div class="nav-actions">
+                <a href="/workspace" class="nav-btn-highlight">
+                    <span>Explore AI</span>
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                        <path d="M4.167 10h11.666m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Landing Home Page -->
+    <main class="hero-section">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="badge-pill">
+                <span class="badge-spark">⚡</span>
+                <span>Next-Gen Audio Intelligence</span>
+            </div>
+
+            <!-- Distinctive Clear Logo -->
+            <div class="hero-logo-box">
+                <div class="logo-circle">
+                    <svg width="72" height="72" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="18" cy="18" r="17" fill="url(#hero-bg-grad)" stroke="url(#hero-stroke-grad)" stroke-width="1.8"/>
+                        <path d="M10 18V18.01M14 12V24M18 7V29M22 12V24M26 18V18.01" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="hero-bg-grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#1E1B4B" stop-opacity="0.85"/>
+                                <stop offset="1" stop-color="#0B0F19" stop-opacity="0.95"/>
+                            </linearGradient>
+                            <linearGradient id="hero-stroke-grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38BDF8"/>
+                                <stop offset="1" stop-color="#818CF8"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Clear Title -->
+            <h1 class="hero-title">Vocalis AI</h1>
+
+            <!-- One line of objective strictly < 10 words -->
+            <p class="hero-objective">
+                Turn meeting recordings into structured executive summaries instantly.
+            </p>
+
+            <!-- Prominent Explore AI CTA Button redirecting to /workspace -->
+            <div class="hero-actions">
+                <a href="/workspace" class="cta-primary-btn" id="explore-ai-btn">
+                    <span>Explore AI</span>
+                    <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+                        <path d="M4.167 10h11.666m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- 3 Core Outputs Showcase -->
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="card-icon summary-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </div>
+                    <h3>1. Overall Meeting Summary</h3>
+                    <p>Synthesizes comprehensive discussions into clear, executive takeaways, key agreements, and consensus.</p>
+                </div>
+
+                <div class="overview-card">
+                    <div class="card-icon speaker-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>2. Person-wise Summary</h3>
+                    <p>Isolates every speaker's contributions, proposals, and arguments with multi-voice diarization.</p>
+                </div>
+
+                <div class="overview-card">
+                    <div class="card-icon action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
+                    <h3>3. Actions To Be Done</h3>
+                    <p>Detects tasks discussed, identifying exactly who said the work and who it is assigned to.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <span class="brand-title">Vocalis<span>AI</span></span>
+            <p>© 2026 Vocalis AI. Enterprise-grade meeting transcription & analysis.</p>
+        </div>
+    </footer>
+</body>
+</html>
