@@ -8,11 +8,11 @@
 
 ## Features
 
-- 🎙️ **Audio Transcription** — Powered by AssemblyAI with speaker diarization
-- 📝 **Overall Meeting Summary** — Comprehensive executive takeaways
-- 👥 **Person-wise Summary** — Individual speaker contributions
-- ✅ **Action Items** — Who said what and who it's assigned to
-- 🌐 **Bilingual Support** — English & Tamil/Tanglish detection
+-  **Audio Transcription** — Powered by AssemblyAI with speaker diarization
+-  **Overall Meeting Summary** — Comprehensive executive takeaways
+-  **Person-wise Summary** — Individual speaker contributions
+-  **Action Items** — Who said what and who it's assigned to
+-  **Bilingual Support** — English & Tamil/Tanglish detection
 
 ---
 
@@ -94,5 +94,9 @@ meeting-summarizer/
 ```
 
 ---
+
+## Author
+
+VINOTHKUMAR G
 
 © 2026 Vocalis AI. Enterprise-grade meeting transcription & analysis.
