@@ -12,6 +12,8 @@ ENV/
 
 # Environment variables — NEVER commit real keys
 .env
+_sync_github.py
+_gh_token.tmp
 
 # Temp files
 *.tmp

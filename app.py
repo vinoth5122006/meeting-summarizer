@@ -358,7 +358,7 @@ async def transcribe_audio(
 ):
     try:
         if not INBUILT_AAI_KEY:
-            raise HTTPException(status_code=503, detail="ASSEMBLYAI_API_KEY is not configured on the server. Please add it in the Render environment variables.")
+            raise HTTPException(status_code=503, detail="ASSEMBLYAI_API_KEY is not configured on the server. Add it to a local .env file or your host environment variables.")
 
         suffix = os.path.splitext(file.filename)[1] if file.filename else ".mp3"
         if not suffix:
@@ -368,7 +368,7 @@ async def transcribe_audio(
             shutil.copyfileobj(file.file, tmp)
             tmp_path = tmp.name
 
-        config = aai.TranscriptionConfig(speaker_labels=True, speech_model=aai.SpeechModel.universal)
+        config = aai.TranscriptionConfig(speaker_labels=True)
         transcriber = aai.Transcriber()
         transcript = transcriber.transcribe(tmp_path, config)
 
